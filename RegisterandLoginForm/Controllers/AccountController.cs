@@ -1,17 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-using RegisterandLoginForm.Data;
-using RegisterandLoginForm.RegisterandLoginFormDAL;
+
+
+using RegisterationandLoginDAL;
 
 namespace RegisterandLoginForm.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly IStudentRepository _repo;
+        private readonly RegisterLoginDBContext _context;
 
-        public AccountController(IStudentRepository repo)
+        public AccountController(RegisterLoginDBContext context)
         {
-            _repo = repo;
+            _context = context;
         }
 
         public ActionResult Login() => View();
@@ -19,7 +20,9 @@ namespace RegisterandLoginForm.Controllers
         [HttpPost]
         public ActionResult Login(string username, string password)
         {
-            var user = _repo.GetStudentByCredentials(username, password);
+            var user = _context.Students
+                .FirstOrDefault(s => s.Username == username && s.Password == password); // adjust if column names differ
+
             if (user != null)
             {
                 HttpContext.Session.SetString("UserId", user.StudentId.ToString());

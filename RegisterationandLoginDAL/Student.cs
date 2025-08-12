@@ -1,10 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using RegisterationandLoginDAL;
+using System.ComponentModel.DataAnnotations;
 
-namespace RegisterandLoginForm.Models
+namespace RegisterandLoginDAL
 {
-
-    [Table("Students")]
     public class Student
     {
         [Key]
@@ -43,3 +41,5 @@ namespace RegisterandLoginForm.Models
 
     }
 }
+
+

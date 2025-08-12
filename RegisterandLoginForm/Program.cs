@@ -1,17 +1,22 @@
 using Microsoft.EntityFrameworkCore;
-using RegisterandLoginForm.Data;
 
-using RegisterandLoginForm.RegisterandLoginFormDAL;
+
+
+using RegisterationandLoginDAL;
+using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
+var configuration = builder.Configuration;
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("LoginConnect")));
+builder.Services.AddDbContext<RegisterLoginDBContext>(options =>
+    options.UseSqlServer(
+        configuration.GetConnectionString("LoginConnect"),
+        b => b.MigrationsAssembly("RegisterationandLoginDAL")
+    ));
 
-builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 
 builder.Services.AddDistributedMemoryCache(); // For in-memory session store
 builder.Services.AddSession(options =>
@@ -31,6 +36,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseSession();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
