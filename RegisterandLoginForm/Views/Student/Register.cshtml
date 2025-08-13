@@ -17,7 +17,8 @@
         backdrop-filter: blur(10px);
         border-radius: 15px;
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        z-index:-123;
+        z-index:3
+      
     }
 
     /* Table Header */
@@ -213,15 +214,15 @@
                 let age = today.getFullYear() - dob.getFullYear();
                 let monthDiff = today.getMonth() - dob.getMonth();
 
-                // Adjust if birthday hasn't occurred yet this year
+                
                 if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
                     age--;
                 }
 
-                // Set calculated age
+                
                 document.getElementById("Age").value = age;
 
-                // Example validation: must be between 18 and 60
+                // Example validation must be between 18 and 60
                 if (age < 18 || age > 60) {
                     alert("Age must be between 18 and 60 years.");
                     document.getElementById("DOB").value = "";
