@@ -18,7 +18,7 @@ builder.Services.AddDbContext<RegisterLoginDBContext>(options =>
     ));
 
 
-builder.Services.AddDistributedMemoryCache(); // For in-memory session store
+builder.Services.AddDistributedMemoryCache(); 
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(30); 
